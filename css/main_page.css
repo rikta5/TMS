@@ -1,0 +1,134 @@
+/* General styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #1b1b1b;
+    color: #f2f2f2;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #444;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    width: 60px;
+    height: 60px;
+}
+
+.main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.main-nav ul li {
+    margin-left: 20px;
+}
+
+.main-nav ul li a {
+    color: #f2f2f2;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.main-nav ul li a:hover {
+    color: #8ca0ff;
+    background-color: white;
+}
+
+/* Main content */
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px 0;
+}
+
+/* Introduction section */
+.intro {
+    max-width: 50%;
+}
+
+.intro h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.intro p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.cta-buttons {
+    display: flex;
+}
+
+.cta-button {
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-right: 20px;
+}
+
+.cta-button.primary {
+    background-color: #8ca0ff;
+    color: #1b1b1b;
+}
+
+.cta-button.secondary {
+    background-color: #333;
+    color: #f2f2f2;
+}
+
+.cta-button:hover {
+    opacity: 0.9;
+}
+
+/* Calendar Section */
+.calendar-section {
+    width: 900px;
+}
+
+/* FullCalendar Override */
+#calendar {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    color: #f2f2f2;
+}
+
+.fc-event {
+    height: auto;
+    white-space: normal;
+}
+
+.fc-event:hover .fc-event-title {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
+}
+
+.fc-daygrid-event {
+    width: 100%;
+    height: auto;
+}
