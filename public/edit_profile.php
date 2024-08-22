@@ -35,7 +35,7 @@ if (!mysqli_stmt_prepare($stmt, $query)) {
         <nav>
             <ul>
                 <li><a href="<?php echo BASE_URL . 'public/dashboard.php'; ?>">Dashboard</a></li>
-                <li><a href="<?php echo BASE_URL . 'includes/logout.php'; ?>">Logout</a></li>
+                <li><a href="<?php echo BASE_URL . 'includes/logout.php'; ?>">Log Out</a></li>
             </ul>
         </nav>
     </header>

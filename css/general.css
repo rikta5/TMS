@@ -146,3 +146,57 @@ main .card {
 .links a:hover {
     background-color: #ddd;
 }
+
+/*Private notepad */
+
+.private-notepad {
+    margin-top: 20px;
+}
+
+.private-notepad .btn {
+    display: block;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.private-notepad .btn:hover {
+    background-color: #0056b3;
+}
+
+.notepad-entries {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.note-card {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 15px;
+    flex: 1 1 calc(33.333% - 20px);
+    box-sizing: border-box;
+}
+
+.private-notepad .btn {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 3px;
+    border: 1px solid #007bff;
+}
+
+.private-notepad .btn:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+

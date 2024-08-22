@@ -46,7 +46,7 @@ include "../includes/config.php";
     </form>
     <div class="links">
         <a href="<?php echo BASE_URL . 'public/profile_management.php'; ?>">Back to Profile</a>
-        <a href="<?php echo BASE_URL . 'includes/logout.php'; ?> ">Logout</a>
+        <a href="<?php echo BASE_URL . 'includes/logout.php'; ?> ">Log Out</a>
     </div>
 </div>
 </body>

@@ -45,7 +45,7 @@ include "../includes/config.php";
         </div>
         <input type="submit" value="Register" class="submit-button">
     </form>
-    <p class="login-link">Already have an account? <a href="<?php echo BASE_URL . 'public/login.php'; ?>">Login</a></p>
+    <p class="login-link">Already have an account? <a href="<?php echo BASE_URL . 'public/login.php'; ?>">Log In</a></p>
 </main>
 </body>
 </html>
