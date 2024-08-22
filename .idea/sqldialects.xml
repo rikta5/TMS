@@ -2,6 +2,7 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/includes/change_password_process.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/includes/contact_process.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/includes/edit_profile_process.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/includes/login_process.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/includes/registration_process.php" dialect="GenericSQL" />

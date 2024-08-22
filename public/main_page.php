@@ -21,7 +21,7 @@ include "../includes/config.php";
             <ul>
                 <li><a href="<?php echo BASE_URL . 'public/dashboard.php'; ?>">Dashboard</a></li>
                 <li><a href="<?php echo BASE_URL . 'public/about_us.php'; ?>">About Us</a></li>
-                <li><a href="#">Features</a></li>
+                <li><a href="<?php echo BASE_URL . 'public/features.php'; ?>">Features</a></li>
                 <?php
                 if (isset($_SESSION['user_id'])) {
                     echo '<li><a href="' . BASE_URL . 'includes/logout.php">Log Out</a></li>';
@@ -38,7 +38,13 @@ include "../includes/config.php";
             <h1>Organize Your Life with Ease: Innovative App for Smart Planning!</h1>
             <p>Welcome to a world where planning becomes a pleasure! Our app provides you with a powerful tool for efficiently managing your time and events.</p>
             <div class="cta-buttons">
-                <a href="<?php echo BASE_URL . 'public/login.php'; ?>" class="cta-button primary">Get Started</a>
+                <?php
+                if (isset($_SESSION['user_id'])) {
+                    echo '<a href="' . BASE_URL . 'public/dashboard.php" class="cta-button primary">Go to Dashboard</a>';
+                } else {
+                    echo '<a href="' . BASE_URL . 'public/login.php" class="cta-button primary">Get Started</a>';
+                }
+                ?>
                 <a href="<?php echo BASE_URL . 'public/about_us.php'; ?>" class="cta-button secondary">Learn More</a>
             </div>
         </section>

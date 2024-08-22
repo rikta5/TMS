@@ -1,0 +1,39 @@
+.main-content {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.features-section {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.features-section h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.features-section p {
+    line-height: 1.6;
+}
+
+.feature {
+    margin-top: 30px;
+}
+
+.feature h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.feature p {
+    line-height: 1.6;
+}
+
+.feature img {
+    width: 100%;
+    max-width: 500px;
+    display: block;
+    margin-top: 10px;
+    border-radius: 8px;
+}
