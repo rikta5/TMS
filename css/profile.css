@@ -28,6 +28,19 @@ body {
     text-decoration: none;
 }
 
+.profile-header nav ul li a.link-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.profile-header nav ul li a.link-button:hover {
+    background-color: #0056b3;
+}
+
 .profile-main {
     display: flex;
     flex-direction: column;
@@ -52,8 +65,15 @@ body {
     margin-right: 20px;
 }
 
+.user-details {
+    display: flex;
+    width: max(50%, 800px);
+    justify-content: space-between;
+}
+
 .user-details h2 {
     margin: 0;
+    font-size: 2em;
 }
 
 .edit-profile-button {
@@ -67,6 +87,10 @@ body {
     display: inline-block;
 }
 
+.edit-profile-button:hover {
+    background-color: #0056b3;
+}
+
 .activity-summary {
     margin-top: 20px;
     background-color: #fff;
@@ -76,3 +100,179 @@ body {
     width: 80%;
     text-align: center;
 }
+
+.activity-summary h3 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+    border-bottom: 2px solid #f5f7fa;
+    padding-bottom: 10px;
+}
+
+/* Invitations Section */
+.invitations {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    width: 80%;
+}
+
+.invitations h3 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+    border-bottom: 2px solid #f5f7fa;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.invitation-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.invitation-item {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.invitation-item:last-child {
+    border-bottom: none;
+}
+
+.invitation-details p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.invitation-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    width: 130px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.accept-btn {
+    background-color: #28a745;
+}
+
+.accept-btn:hover {
+    background-color: #218838;
+}
+
+.decline-btn {
+    background-color: #dc3545;
+}
+
+.decline-btn:hover {
+    background-color: #c82333;
+}
+
+/* Friends Section */
+.friends {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    width: 80%;
+}
+
+.profile-pic-small {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+}
+
+.friends h3 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+    border-bottom: 2px solid #f5f7fa;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.friends-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.friend-item {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.friend-item:last-child {
+    border-bottom: none;
+}
+
+.friend-details p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.friend-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.remove-friend-btn {
+    background-color: #dc3545;
+}
+
+.remove-friend-btn:hover {
+    background-color: #c82333;
+}
+
+/* Friend Status Section */
+.friend-status {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.friend-status p {
+    background-color: #007BFF;
+    padding: 15px 20px;
+    font-size: 18px;
+    color: #fff;
+    margin: 0;
+    font-weight: bold;
+}
+
+.send-request-btn {
+    width: 150px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #007bff;
+    transition: background-color 0.3s;
+}
+
+.send-request-btn:hover {
+    background-color: #0056b3;
+    color: #f4f4f4;
+}
+

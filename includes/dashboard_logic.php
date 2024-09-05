@@ -2,19 +2,25 @@
 session_start();
 require '../includes/db.php';
 include "../includes/config.php";
-
-if (!isset($_SESSION['user_id'])) {
-    header('Location:' . BASE_URL . 'public/login.php');
-    exit();
-}
+require '../includes/login_requirement.php';
 
 $user_id = $_SESSION['user_id'];
+
+// Fetch unread notifications count
+$notification_query = "
+    SELECT COUNT(*) AS unread_count 
+    FROM notifications 
+    WHERE user_id = $user_id AND is_read = 0
+";
+/** @noinspection PhpUndefinedVariableInspection */
+$notification_result = mysqli_query($conn, $notification_query);
+$notification_data = mysqli_fetch_assoc($notification_result);
+$unread_notifications = $notification_data['unread_count'];
 
 // Fetch assigned tasks that are not completed
 $tasks_query = "SELECT * FROM tasks WHERE task_id IN (
     SELECT task_id FROM task_users WHERE user_id = $user_id
 ) AND status != 'Completed'";
-/** @noinspection PhpUndefinedVariableInspection */
 $tasks_result = mysqli_query($conn, $tasks_query);
 $tasks = mysqli_fetch_all($tasks_result, MYSQLI_ASSOC);
 
@@ -62,4 +68,14 @@ $people = mysqli_fetch_all($people_result, MYSQLI_ASSOC);
 $notepad_query = "SELECT * FROM private_notepad WHERE user_id = $user_id";
 $notepad_entries = mysqli_query($conn, $notepad_query);
 
-
+// Fetch friends list
+$friends_query = "
+    SELECT u.user_id, u.username
+    FROM users u
+    JOIN friends f ON (u.user_id = f.friend_id OR u.user_id = f.user_id)
+    WHERE (f.user_id = $user_id OR f.friend_id = $user_id)
+    AND f.status = 'Accepted'
+    AND u.user_id != $user_id
+";
+$friends_result = mysqli_query($conn, $friends_query);
+$friends = mysqli_fetch_all($friends_result, MYSQLI_ASSOC);

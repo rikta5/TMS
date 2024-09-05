@@ -47,6 +47,19 @@ nav ul li a:hover {
     background-color: #ddd;
 }
 
+nav ul li a.link-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+nav ul li a.link-button:hover {
+    background-color: #0056b3;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -97,8 +110,33 @@ table th {
     background-color: #f4f4f4;
 }
 
+form button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 150px;
+    text-align: center;
+    display: inline-block;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+form select {
+    padding: 5px;
+    font-size: 16px;
+    width: 150px;
+    display: inline-block;
+}
+
 button[name="mark_finished"] {
-    background-color: #4CAF50; /* Green */
+    width: 180px;
+    background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -109,5 +147,5 @@ button[name="mark_finished"] {
 }
 
 button[name="mark_finished"]:hover {
-    background-color: #45a049; /* Darker green */
+    background-color: #45a049;
 }

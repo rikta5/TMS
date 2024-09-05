@@ -61,6 +61,19 @@ body {
     background-color: #ddd;
 }
 
+.main-nav ul li a.link-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.main-nav ul li a.link-button:hover {
+    background-color: #0056b3;
+}
+
 /* Main content */
 .main-content {
     display: flex;

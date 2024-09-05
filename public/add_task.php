@@ -2,8 +2,8 @@
 session_start();
 require '../includes/db.php';
 include "../includes/config.php";
+require '../includes/login_requirement.php';
 
-// Fetch categories for the dropdown
 $category_query = "SELECT * FROM task_categories WHERE user_id = {$_SESSION['user_id']}";
 /** @noinspection PhpUndefinedVariableInspection */
 $categories = mysqli_query($conn, $category_query);
@@ -27,7 +27,7 @@ $categories = mysqli_query($conn, $category_query);
         <nav>
             <ul>
                 <li><a href="<?php echo BASE_URL . 'public/dashboard.php'; ?>">Dashboard</a></li>
-                <li><a href="<?php echo BASE_URL . 'includes/logout.php'; ?>">Log Out</a></li>
+                <li><a href="<?php echo BASE_URL . 'includes/logout.php'; ?>" class="link-button">Log Out</a></li>
             </ul>
         </nav>
     </header>

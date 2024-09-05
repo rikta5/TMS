@@ -2,6 +2,7 @@
 session_start();
 require '../includes/db.php';
 include "../includes/config.php";
+require '../includes/login_requirement.php';
 ?>
 <!doctype html>
 <html lang="en">

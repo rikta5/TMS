@@ -2,6 +2,7 @@
 session_start();
 require '../includes/db.php';
 include "../includes/config.php";
+require '../includes/login_requirement.php';
 
 $user_id = $_SESSION['user_id'];
 $query = "SELECT * FROM users WHERE user_id = ?";

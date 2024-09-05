@@ -25,9 +25,9 @@ require '../includes/db.php';
                 <li><a href="<?php echo BASE_URL; ?>public/contact.php">Contact</a></li>
                 <?php
                 if (isset($_SESSION['user_id'])) {
-                    echo '<li><a href="' . BASE_URL . 'includes/logout.php">Log Out</a></li>';
+                    echo '<li><a href="' . BASE_URL . 'includes/logout.php" class="link-button">Log Out</a></li>';
                 } else {
-                    echo '<li><a href="' . BASE_URL . 'public/login.php">Log In</a></li>';
+                    echo '<li><a href="' . BASE_URL . 'public/login.php" class="link-button">Log In</a></li>';
                 }
                 ?>
             </ul>

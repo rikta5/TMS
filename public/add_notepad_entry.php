@@ -2,6 +2,7 @@
 session_start();
 require '../includes/db.php';
 include "../includes/config.php";
+require '../includes/login_requirement.php';
 
 if (!isset($_SESSION['user_id'])) {
     header('Location:' . BASE_URL . 'public/login.php');

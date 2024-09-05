@@ -2,6 +2,7 @@
 session_start();
 require '../includes/db.php';
 include "../includes/config.php";
+require '../includes/login_requirement.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     /** @noinspection PhpUndefinedVariableInspection */
@@ -39,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <nav>
             <ul>
                 <li><a href="<?php echo BASE_URL . 'public/dashboard.php'; ?>">Dashboard</a></li>
-                <li><a href="<?php echo BASE_URL . 'includes/logout.php'; ?>">Log Out</a></li>
+                <li><a href="<?php echo BASE_URL . 'includes/logout.php'; ?>" class="link-button">Log Out</a></li>
             </ul>
         </nav>
     </header>

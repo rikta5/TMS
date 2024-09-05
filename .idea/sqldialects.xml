@@ -6,10 +6,14 @@
     <file url="file://$PROJECT_DIR$/includes/contact_process.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/includes/dashboard_logic.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/includes/edit_profile_process.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/includes/handle_friend_request.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/includes/handle_invitation.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/includes/login_process.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/includes/notepad_entry_process.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/includes/registration_process.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/includes/send_friend_request.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/public/add_category.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/public/add_friends.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/public/add_task.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/public/edit_profile.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/public/profile_management.php" dialect="GenericSQL" />

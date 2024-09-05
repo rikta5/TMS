@@ -19,7 +19,11 @@ include '../includes/dashboard_logic.php';
         <nav>
             <ul>
                 <li><a href="<?php echo BASE_URL . 'public/main_page.php'; ?>">Home</a></li>
-                <li><a href="<?php echo BASE_URL . 'public/profile_management.php'; ?>">My Profile</a></li>
+                <?php if ($unread_notifications > 0): ?>
+                    <li><a href="<?php echo BASE_URL . 'public/profile_management.php'; ?>" class="notification-red">My Profile</a></li>
+                <?php else: ?>
+                    <li><a href="<?php echo BASE_URL . 'public/profile_management.php'; ?>">My Profile</a></li>
+                <?php endif; ?>
                 <li><a href="<?php echo BASE_URL . 'public/add_task.php'; ?>">New Task</a></li>
                 <li><a href="<?php echo BASE_URL . 'public/add_category.php'; ?>">New Category</a></li>
             </ul>
@@ -96,7 +100,7 @@ include '../includes/dashboard_logic.php';
         </div>
 
         <div class="card people">
-            <h2>People</h2>
+            <h2>People from Collaborations</h2>
             <?php if (empty($people)): ?>
                 <p>No people in your workspace.</p>
             <?php else: ?>
@@ -105,6 +109,23 @@ include '../includes/dashboard_logic.php';
                         <li>
                             <a href="<?php echo BASE_URL . 'public/profile_management.php?user_id=' . intval($person['user_id']); ?>">
                                 <?php echo htmlspecialchars($person['username']); ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+        </div>
+
+        <div class="card friends">
+            <h2>Friends</h2>
+            <?php if (empty($friends)): ?>
+                <p>You have no friends.</p>
+            <?php else: ?>
+                <ul>
+                    <?php foreach ($friends as $friend): ?>
+                        <li>
+                            <a href="<?php echo BASE_URL . 'public/profile_management.php?user_id=' . intval($friend['user_id']); ?>">
+                                <?php echo htmlspecialchars($friend['username']); ?>
                             </a>
                         </li>
                     <?php endforeach; ?>
