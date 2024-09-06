@@ -7,7 +7,7 @@ require '../includes/login_requirement.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION['user_id'];
     $friend_id = isset($_POST['friend_id']) ? intval($_POST['friend_id']) : 0;
-    $action = isset($_POST['action']) ? $_POST['action'] : '';
+    $action = $_POST['action'] ?? '';
 
     // Check if the friend request exists and the current user is involved
     $check_query = "

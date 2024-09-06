@@ -29,7 +29,6 @@ if (mysqli_query($conn, $query)) {
     // Insert notification
     $notification_query = "INSERT INTO notifications (user_id, message) VALUES ($friend_id, 'You have a new friend request from $user_id.')";
     mysqli_query($conn, $notification_query);
-
     header('Location: ' . BASE_URL . 'public/profile_management.php?user_id=' . $friend_id . '&success=requestsent');
 } else {
     // Handle error

@@ -100,7 +100,7 @@ include '../includes/dashboard_logic.php';
         </div>
 
         <div class="card people">
-            <h2>People from Collaborations</h2>
+            <h2>Collaborators</h2>
             <?php if (empty($people)): ?>
                 <p>No people in your workspace.</p>
             <?php else: ?>

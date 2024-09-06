@@ -104,6 +104,53 @@ function getPriorityText($priority) {
 }
 
 $task['priority_text'] = getPriorityText($task['priority']);
+
+// Fetch comments (including replies)
+$comments_query = "
+SELECT c.*, u.username 
+FROM comments c 
+JOIN users u ON c.user_id = u.user_id 
+WHERE c.task_id = $task_id 
+ORDER BY COALESCE(c.parent_comment_id, c.comment_id), c.created_at
+";
+$comments_result = mysqli_query($conn, $comments_query);
+
+// Handle new comment submission
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['comment_content'])) {
+    $content = mysqli_real_escape_string($conn, $_POST['comment_content']);
+    $parent_comment_id = isset($_POST['parent_comment_id']) ? intval($_POST['parent_comment_id']) : null;
+
+    $insert_comment_query = "INSERT INTO comments (task_id, user_id, content, parent_comment_id) VALUES ($task_id, $user_id, '$content', " . ($parent_comment_id ? $parent_comment_id : "NULL") . ")";
+    mysqli_query($conn, $insert_comment_query);
+
+    header("Location: task_details.php?task_id=$task_id");
+    exit();
+}
+
+function display_comments($comments, $parent_comment_id = null) {
+    foreach ($comments as $comment) {
+        if ($comment['parent_comment_id'] == $parent_comment_id) {
+            echo '<div class="comment">';
+            echo '<p><strong>' . htmlspecialchars($comment['username']) . ':</strong> ' . htmlspecialchars($comment['content']) . '</p>';
+            echo '<p><em>' . htmlspecialchars($comment['created_at']) . '</em></p>';
+
+            echo '<form method="post" action="task_details.php?task_id=' . $comment['task_id'] . '">';
+            echo '<input type="hidden" name="parent_comment_id" value="' . $comment['comment_id'] . '">';
+            echo '<textarea name="comment_content" placeholder="Reply..."></textarea>';
+            echo '<button type="submit" class="comment-button">Reply</button>';
+            echo '</form>';
+
+            // Recursive call to display replies
+            display_comments($comments, $comment['comment_id']);
+            echo '</div>';
+        }
+    }
+}
+
+$comments = [];
+while ($row = mysqli_fetch_assoc($comments_result)) {
+$comments[] = $row;
+}
 ?>
 
 <!doctype html>
@@ -148,12 +195,17 @@ $task['priority_text'] = getPriorityText($task['priority']);
                     <form action="task_details.php?task_id=<?php echo $task_id; ?>" method="post">
                         <label for="invite_user_id">User:</label>
                         <select id="invite_user_id" name="invite_user_id" required>
+                            <option value="" disabled selected hidden>Select an option</option>
                             <?php foreach ($friends as $friend): ?>
                                 <option value="<?php echo $friend['user_id']; ?>"><?php echo htmlspecialchars($friend['username']); ?></option>
                             <?php endforeach; ?>
+                            <?php if (mysqli_num_rows($friends) === 0): ?>
+                                <option value="" disabled>No friends available to invite</option>
+                            <?php endif; ?>
                         </select>
                         <label for="role">Role:</label>
                         <select id="role" name="role" required>
+                            <option value="" disabled selected hidden>Select an option</option>
                             <?php if ($user_role == 'Owner'): ?>
                                 <option value="Owner">Owner</option>
                             <?php endif; ?>
@@ -190,7 +242,7 @@ $task['priority_text'] = getPriorityText($task['priority']);
             </table>
         </section>
 
-        <?php if ($user_role == 'Owner'): ?>
+        <?php if ($user_role == 'Owner' && $task['task_status'] != 'Completed'): ?>
             <section>
                 <h2>Manage Users</h2>
                 <table>
@@ -199,9 +251,7 @@ $task['priority_text'] = getPriorityText($task['priority']);
                         <th>Username</th>
                         <th>Role</th>
                         <th>Status</th>
-                        <?php if ($task['task_status'] != 'Completed' && $user_role == 'Owner'): ?>
-                            <th>Actions</th>
-                        <?php endif; ?>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -210,29 +260,26 @@ $task['priority_text'] = getPriorityText($task['priority']);
                             <td><?php echo htmlspecialchars($task_user['username']); ?></td>
                             <td><?php echo htmlspecialchars($task_user['role']); ?></td>
                             <td><?php echo htmlspecialchars($task_user['status']); ?></td>
-                            <?php if ($task['task_status'] != 'Completed'): ?>
-                                <td>
-                                    <form action="task_details.php?task_id=<?php echo $task_id; ?>" method="post">
-                                        <input type="hidden" name="change_user_id" value="<?php echo $task_user['user_id']; ?>">
-                                        <select name="new_role">
-                                            <option value="Contributor" <?php if ($task_user['role'] == 'Contributor') echo 'selected'; ?>>Contributor</option>
-                                            <option value="Viewer" <?php if ($task_user['role'] == 'Viewer') echo 'selected'; ?>>Viewer</option>
-                                            <option value="Owner" <?php if ($task_user['role'] == 'Owner') echo 'selected'; ?>>Owner</option>
-                                        </select>
-                                        <button type="submit" name="change_role">Change Role</button>
-                                    </form>
+                            <td>
+                                <form action="task_details.php?task_id=<?php echo $task_id; ?>" method="post">
+                                    <input type="hidden" name="change_user_id" value="<?php echo $task_user['user_id']; ?>">
+                                    <select name="new_role">
+                                        <option value="Contributor" <?php if ($task_user['role'] == 'Contributor') echo 'selected'; ?>>Contributor</option>
+                                        <option value="Viewer" <?php if ($task_user['role'] == 'Viewer') echo 'selected'; ?>>Viewer</option>
+                                        <option value="Owner" <?php if ($task_user['role'] == 'Owner') echo 'selected'; ?>>Owner</option>
+                                    </select>
+                                    <button type="submit" name="change_role">Change Role</button>
+                                </form>
 
-                                    <!-- Form to change status -->
-                                    <form action="task_details.php?task_id=<?php echo $task_id; ?>" method="post">
-                                        <input type="hidden" name="user_id_to_change" value="<?php echo $task_user['user_id']; ?>">
-                                        <select name="status">
-                                            <option value="active" <?php if ($task_user['status'] == 'active') echo 'selected'; ?>>Active</option>
-                                            <option value="inactive" <?php if ($task_user['status'] == 'inactive') echo 'selected'; ?>>Inactive</option>
-                                        </select>
-                                        <button type="submit" name="activate_deactivate">Change Status</button>
-                                    </form>
-                                </td>
-                            <?php endif; ?>
+                                <form action="task_details.php?task_id=<?php echo $task_id; ?>" method="post">
+                                    <input type="hidden" name="user_id_to_change" value="<?php echo $task_user['user_id']; ?>">
+                                    <select name="status">
+                                        <option value="active" <?php if ($task_user['status'] == 'active') echo 'selected'; ?>>Active</option>
+                                        <option value="inactive" <?php if ($task_user['status'] == 'inactive') echo 'selected'; ?>>Inactive</option>
+                                    </select>
+                                    <button type="submit" name="activate_deactivate">Change Status</button>
+                                </form>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
@@ -241,13 +288,24 @@ $task['priority_text'] = getPriorityText($task['priority']);
 
 
             <section>
-                <?php if ($task['task_status'] !== 'Completed') : ?>
                 <form action="task_details.php?task_id=<?php echo $task_id; ?>" method="post">
                     <button type="submit" name="mark_finished">Mark as Finished</button>
                 </form>
-                <?php endif; ?>
             </section>
         <?php endif; ?>
+
+        <section>
+            <h2>Comments</h2>
+
+            <form action="task_details.php?task_id=<?php echo $task_id; ?>" method="post">
+                <textarea name="comment_content" placeholder="Add a comment..." required></textarea>
+                <button type="submit" class="comment-button">Post Comment</button>
+            </form>
+
+            <div class="comments">
+                <?php display_comments($comments); ?>
+            </div>
+        </section>
     </main>
 </div>
 </body>
