@@ -25,6 +25,7 @@ include '../includes/dashboard_logic.php';
                     <li><a href="<?php echo BASE_URL . 'public/profile_management.php'; ?>">My Profile</a></li>
                 <?php endif; ?>
                 <li><a href="<?php echo BASE_URL . 'public/add_task.php'; ?>">New Task</a></li>
+                <li><a href="<?php echo BASE_URL . 'public/create_project.php'; ?>">New Project</a></li>
                 <li><a href="<?php echo BASE_URL . 'public/add_category.php'; ?>">New Category</a></li>
             </ul>
             <a href="<?php echo BASE_URL . 'includes/logout.php'; ?>" class="link-button">Log Out</a>

@@ -159,7 +159,7 @@ $comments[] = $row;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Manage Task</title>
+    <title>Task Details</title>
     <link rel="stylesheet" href="/css/manage_task.css">
 </head>
 <body>
@@ -206,9 +206,6 @@ $comments[] = $row;
                         <label for="role">Role:</label>
                         <select id="role" name="role" required>
                             <option value="" disabled selected hidden>Select an option</option>
-                            <?php if ($user_role == 'Owner'): ?>
-                                <option value="Owner">Owner</option>
-                            <?php endif; ?>
                             <option value="Contributor">Contributor</option>
                             <option value="Viewer">Viewer</option>
                         </select>
@@ -298,7 +295,7 @@ $comments[] = $row;
             <h2>Comments</h2>
 
             <form action="task_details.php?task_id=<?php echo $task_id; ?>" method="post">
-                <textarea name="comment_content" placeholder="Add a comment..." required></textarea>
+                <textarea name="comment_content" placeholder="Add a comment..." required style="width: 150px; height: 50px"></textarea>
                 <button type="submit" class="comment-button">Post Comment</button>
             </form>
 

@@ -31,23 +31,32 @@ $finished_tasks_query = "SELECT * FROM tasks WHERE task_id IN (
 $finished_tasks_result = mysqli_query($conn, $finished_tasks_query);
 $finished_tasks = mysqli_fetch_all($finished_tasks_result, MYSQLI_ASSOC);
 
-// Fetch projects with completed tasks
+// Fetch projects that are not completed
 $projects_query = "
     SELECT p.project_id, p.project_name
     FROM projects p
-    JOIN tasks t ON t.task_id IN (
+    JOIN project_tasks pt ON pt.project_id = p.project_id
+    JOIN tasks t ON t.task_id = pt.task_id
+    WHERE pt.task_id IN (
         SELECT task_id FROM task_users WHERE user_id = $user_id
     )
-    WHERE p.project_id IN (
-        SELECT DISTINCT project_id FROM tasks WHERE task_id IN (
-            SELECT task_id FROM task_users WHERE user_id = $user_id
-        )
-    )
     GROUP BY p.project_id, p.project_name
-    HAVING COUNT(t.task_id) = SUM(CASE WHEN t.status = 'Completed' THEN 1 ELSE 0 END)
+    HAVING COUNT(CASE WHEN t.status = 'Completed' THEN 1 END) < COUNT(t.task_id)
 ";
 $projects_result = mysqli_query($conn, $projects_query);
 $projects = mysqli_fetch_all($projects_result, MYSQLI_ASSOC);
+
+// Fetch projects that are completed
+$finished_projects_query = "
+    SELECT p.project_id, p.project_name
+    FROM projects p
+    JOIN project_tasks pt ON pt.project_id = p.project_id
+    JOIN tasks t ON t.task_id = pt.task_id
+    GROUP BY p.project_id, p.project_name
+    HAVING COUNT(t.task_id) = COUNT(CASE WHEN t.status = 'Completed' THEN 1 END)
+";
+$finished_projects_result = mysqli_query($conn, $finished_projects_query);
+$finished_projects = mysqli_fetch_all($finished_projects_result, MYSQLI_ASSOC);
 
 // Fetch unique people in workspace
 $people_query = "
@@ -62,15 +71,13 @@ $people_query = "
 $people_result = mysqli_query($conn, $people_query);
 $people = mysqli_fetch_all($people_result, MYSQLI_ASSOC);
 
-
-
 // Fetch notepad entries
 $notepad_query = "SELECT * FROM private_notepad WHERE user_id = $user_id";
 $notepad_entries = mysqli_query($conn, $notepad_query);
 
 // Fetch friends list
 $friends_query = "
-    SELECT u.user_id, u.username
+    SELECT DISTINCT u.user_id, u.username
     FROM users u
     JOIN friends f ON (u.user_id = f.friend_id OR u.user_id = f.user_id)
     WHERE (f.user_id = $user_id OR f.friend_id = $user_id)

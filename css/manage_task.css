@@ -150,7 +150,6 @@ button[name="mark_finished"]:hover {
     background-color: #45a049;
 }
 
-/* Comments Section */
 .comments-section {
     margin-top: 30px;
     background-color: #fff;
@@ -165,7 +164,6 @@ button[name="mark_finished"]:hover {
     color: #333;
 }
 
-/* Individual Comments */
 .comment {
     padding: 15px;
     margin-bottom: 15px;
@@ -213,7 +211,6 @@ button[name="mark_finished"]:hover {
     text-decoration: underline;
 }
 
-/* Replies */
 .reply {
     margin-left: 40px;
     padding-left: 10px;
@@ -224,7 +221,6 @@ button[name="mark_finished"]:hover {
     margin-bottom: 10px;
 }
 
-/* Comment Form */
 .comment-form {
     margin-top: 20px;
     border-top: 1px solid #ddd;
